@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+  <head>
+
+<link href="{{ url_for('static',filename='styles/main.css') }}" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/static/app.js"></script>
+<title>Python Whyline</title>
+  </head>
+
+<body>
+<div class="header">
+    <h> Python Whyline</h>
+    </div> 
+
+    <div class="grid-container">
+      <div class="right"  >
+        <button type="button" id = 'clicks_f' onclick="stepForward()"> Step forward</button>
+         
+     
+      </div>
+      <div class="middle"  >
+        
+         
+         {{result}}
+      </div>
+      <div class="left"  >
+        
+        
+    
+        
+        
+        <button type="button" id = 'clicks_b' onclick="stepBackward()"> Step back</button>
+    
+
+      </div>
+      <div class = "footer">
+          <div ></div>  <span id="num_click"></span></div>
+      <div class="slidecontainer">
+  
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange"> 
+  </input>
+  
+
+        </div>
+     
+     
+   
+      </div>
+    
+    
+</div>
+</body>
+</html>
+
+
+
+
+
+
+<script type="text/javascript">
+var clicks = 0;
+document.getElementById("num_click").innerHTML = clicks;
+
+
+function stepForward() {
+    clicks += 1;
+    ///document.getElementById("clicks_f").innerHTML = clicks;
+    document.getElementById("num_click").innerHTML = clicks;
+};
+
+function stepBackward(){
+    if(clicks >=1){
+        clicks -= 1;
+        //document.getElementById("clicks_b").innerHTML = clicks;
+    }
+    else{
+        clicks = 0;
+    }
+    document.getElementById("num_click").innerHTML = clicks;
+    }; 
+
+</script>
+
+

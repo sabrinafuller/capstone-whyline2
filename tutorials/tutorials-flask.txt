@@ -1,0 +1,15 @@
+https://python.plainenglish.io/how-to-send-a-file-using-javascript-and-python-5038dc39707b
+Helped set up the server
+
+More server
+https://towardsdatascience.com/talking-to-python-from-javascript-flask-and-the-fetch-api-e0ef3573c451
+
+
+
+var index = 33;fetch(`/getdata/${index}`)
+.then(function (response) {
+    return response.text();
+}).then(function (text) {
+    console.log('GET response text:');
+    console.log(text); 
+});

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+  <head>
+
+<link href="{{ url_for('static',filename='styles/main.css') }}" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/static/app.js"></script>
+<title>Python Whyline</title>
+  </head>
+
+<body>
+<div class="header">
+    <h> Python Whyline</h>
+    </div> 
+
+    <div class="grid-container">
+      <div class="right"  >
+     
+      </div>
+      <div class="middle"  >
+        <form enctype = "multipart/form-data" onsubmit="return false;" >
+            <input id="file" type="file" name="static_file" />
+            <button id="upload-button" onclick="uploadFile(this.form)"> Upload </button>
+            </form> <div id="program_upload_response"> </div>
+          
+      <div class="left"  >
+        <form enctype = "multipart/form-data" onsubmit="return false";>
+        <button id = "get_analysis" onclick="getAnalysis()"> Get Analysis </button>
+
+        <form action = "http://localhost:5000/start_debug" method = "POST">
+          <button id = "start" ></button> <a href=start_debug>start debug</button>  </a>
+          <p><input type = "submit" value = "submit" /></p>
+       </form>
+        
+      <div id="program_analysis"> </div>
+      </div>
+      <div class = "footer">
+      <div class="slidecontainer">
+  
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange"> 
+  </input>
+  
+
+        </div>
+     
+     
+   
+      </div>
+    
+    
+</div>
+</body>
+</html>
+
+<script>
+  function startDebug(){ 
+    var post_req = new XMLHttpRequest();
+    post_req.open("POST", "/start_debug", true);
+    post_req.onload = function(oEvent){
+      if(post_req.status == 200){
+        console.log(post_req.responseText);
+      }
+      else{
+        console.log("Error: " + post_req.status);
+      }
+    }; 
+    post_req.send()
+    console.log("Sucess")
+    }
+    
+
+  
+  function getAnalysis(){
+    var out_output = document.getElementById("get_analysis") 
+    var get_req = new XMLHttpRequest();
+    get_req.open("POST", "get_analysis", true);
+    get_req.onload = function(oEvent){
+      var response = JSON.parse(get_req.responseText);
+      if(get_req.status ==200){
+        out_output.innerHTML = response.output;
+        console.log(get_req.response)
+      }
+      else{
+        out_output.innerHTML = "Error occurred when trying to upload your file.<br \/>";
+
+      } } ; 
+      out_output.innerHTML = "Sending file!";
+    console.log("Sucess")
+    get_req.send();
+
+  } 
+    function uploadFile(form){ 
+        const formData = new FormData(form); 
+        var out_output = document.getElementById("program_upload_response") 
+        var out_Req = new XMLHttpRequest();
+        out_Req.open("POST", "program_upload_response", true);
+         out_Req.onload = function(oEvent) {
+        if (out_Req.status == 200) {
+        out_output.innerHTML = "Program uploaded";
+        console.log(out_Req.response)
+        } else {
+        out_output.innerHTML = "Error occurred when trying to upload your file.<br \/>";
+        }
+        }; 
+        out_output.innerHTML = "Sending file!";
+    console.log("Sending file!")
+    out_Req.send(formData);
+}
+    
+
+
+
+
+</script> 
