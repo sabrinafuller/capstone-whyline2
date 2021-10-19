@@ -14,7 +14,6 @@ import inspect
 
 def trace_lines(frame, event, arg):
     print(frame.f_lineno)
-    return 1
 
 def read_ast():
     tree = None
@@ -67,9 +66,8 @@ def main_two():
     # create the python debugger 
     psi = rdb.rdb()
     #psi.user_call(first_frame, None)
-    print(obj_list, "obj list")
-    for i in  obj_list:
-        print(i[1].f_lineno)
+    
+    for i in obj_list:
         psi.user_call(i[1], None)
         psi.user_line(i[1])
         psi.user_return(i[1], None)

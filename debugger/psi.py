@@ -12,7 +12,7 @@ from inspect import currentframe, getframeinfo, walktree
 def main():
     tree = ast.parse("test_1.py")
     robj = RObject(tree)
-    print(traceback.extract_stack())
+    #print(traceback.extract_stack())
     #with open("test_1.py","r") as f: 
      #   my_string = f.read()
     
@@ -22,7 +22,7 @@ def main():
     fout, error_out = None, None
     args = ['python3',  "test1.py" ]
     #x = subprocess.call(args, shell = "-m pdb",  stdout = fout , stderr = error_out)
-    print(sys._current_frames())
+    #print(sys._current_frames())
     #print(x, fout, error_out)
     
     

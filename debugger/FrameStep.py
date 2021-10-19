@@ -22,6 +22,7 @@ class FrameStep():
 
     def apply_b(self, frames):
         new_frames = {}
+        print("FRAMES here", frames)
         for k in frames:
             new_frames[k] = self[k].apply_b(frames[k])
         return new_frames

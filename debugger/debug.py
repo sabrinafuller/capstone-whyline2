@@ -16,6 +16,7 @@ class debug:
         self.frame_dict = dict()
         self.program_name = program_name
         self.debug_dict = dict()
+        self.first_frame = None
 
     def trace_lines(self, frame, event, arg):
         print(frame.f_lineno)
@@ -51,11 +52,15 @@ class debug:
         # for each frame in the frame list
         # check to see if its in the target program and add it to the dictionary
         #print(self.frame_list)
+        f = []
         for i in self.frame_list:
             x = inspect.getmodule(i[1])
-            #print(x.__name__)
+            print(x.__name__)
             if(x.__name__ == "debugger."+ prog_name):
+                f.append(i[0])
                 self.debug_dict.update({i[0]:i[1]})
+        
+        self.first_frame = self.debug_dict[min(f)]
         return self.debug_dict
 
 
@@ -63,24 +68,30 @@ class debug:
     def run(self):
         # get the list of frame from the target dictionary
         my_dict = self.get_target_program_frames("test1")
-        obj_list = list(my_dict.items())   
+        obj_list = list(my_dict.items()) 
+        print(obj_list)
         # create the python debugger 
         psi = rdb()
         #psi.user_call(first_frame, None)
-        
-        for i in obj_list:
-            #print(i[1])
+        for  i in obj_list:
             psi.user_call(i[1], None)
             psi.user_line(i[1])
             psi.user_return(i[1], None)
-            #print(psi.frame_steps)
+      
         
-        #print("PSI frame steps \n")
-        #print(psi.frame_steps[0][1])
-        #print(len(psi.frame_steps))
-        #for i in psi.frame_steps:
-            #print(i[1])
+        print(dir(psi))
+        print(psi.master_frame_dict)
+        print(psi.call_master_list)
+        print("_______________")
+        print(psi.last_frame_dict)
+     
         self.debug_dict = psi.frame_steps
         
        # print(psi.frame_steps)
+        print(self.first_frame)
+        print(")))))))))))))))")
+        print(type(psi.frame_steps))
+        for k in psi.frame_steps:
+            print(k[1])
+        print("$$$$$$$$$$$")
         return psi.frame_steps

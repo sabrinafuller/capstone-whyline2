@@ -69,7 +69,7 @@ class rdb(bdb.Bdb):
             self.last_line_no = self.call_stack_linenos.pop(-1)
             
             self.call_master_list.append(self.last_line_no)
-            print("user return")
+            
         except:
-            print("didn't work")
+            
             pass 

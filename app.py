@@ -22,7 +22,7 @@ def run_debugger():
         debug_output = debugger.run()
         return debug_output
     except:
-        return "Debugging failed"
+        return "Debugging failed None"
 
 @app.route("/", methods=['GET', 'POST'])
 def get_homepage():
@@ -64,7 +64,7 @@ def start_debug():
 
 @app.route('/whyline', methods=['GET'])
 def get_whyline():
-    # '<h1>These are my thoughts on </h1> <a href=blog/2020/dogs>dogs</a></h1>'
+    
     return render_template('analysis.html' , input = run_debugger() )
 
 @app.route('/code', methods = ['GET'])
@@ -113,3 +113,31 @@ def get_digest(file_path):
 
 
 app.run(debug=True)
+
+
+def test_run_debugger():
+    frame_steps= run_debugger() 
+    frame_delta_adds= []
+    frame_delta_subs= []
+    frame_delta_updates= []
+
+
+    for k in frame_steps:
+        #print(list(k[1].deltas.items())[0][1].additions)
+        frame_delta_adds.append(list(k[1].deltas.items())[0][1].additions)
+        frame_delta_subs.append(list(k[1].deltas.items())[0][1].deletions)
+        frame_delta_updates.append(list(k[1].deltas.items())[0][1].updates)
+
+    for i in range(len(frame_delta_adds)):
+        print("adds")
+        print(frame_delta_adds[i])
+        print("del")
+        print(frame_delta_subs[i])
+        print("updates")
+        print(frame_delta_updates[i])
+
+
+
+    
+
+
